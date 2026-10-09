@@ -1,43 +1,34 @@
 # 후삼국통일 (후삼국 대란: 천하통일)
 
-후삼국시대 배경 턴제(계절 단위) 역사 전략 시뮬레이션 (Unity 6, UI Toolkit)
+후삼국시대 배경 턴제(계절 단위) 역사 전략 롤플레잉 시뮬레이션 (Unity 6, UI Toolkit)
 
-- 기획서: [docs/GDD.md](docs/GDD.md)
+- **처음이라면 / 이어서 작업한다면: [docs/HANDOFF.md](docs/HANDOFF.md)** — 현재 상태, 실행 방법, 결정이 필요한 질문
+- 기획서: [docs/GDD.md](docs/GDD.md) · 캠페인 15막 표: [docs/CAMPAIGN_ACTS.md](docs/CAMPAIGN_ACTS.md) · 대사 초안: [docs/CAMPAIGN_SCRIPT.md](docs/CAMPAIGN_SCRIPT.md) · 아트 목록: [docs/ART_LIST.md](docs/ART_LIST.md)
+- 플레이테스트 기록: [docs/PLAYTEST_FEEDBACK.md](docs/PLAYTEST_FEEDBACK.md)
 
-## 시작하기
+## 게임 하기 (실행 파일)
 
-1. Unity Hub → **Add → Add project from disk** → 이 저장소 폴더 선택 → Unity 6 버전 선택
-2. 처음 열면 `Packages/`와 나머지 `ProjectSettings/` 파일이 자동 생성됩니다. (커밋해 주세요)
-3. 상단 메뉴 **Husamguk → MVP 샘플 세팅** 실행
-   - 완산주 일대 샘플 지역(§GDD 3.0)·세력·신하·시나리오 데이터와 `Main` 씬이 만들어집니다.
-4. `Assets/_Project/Scenes/Main.unity`를 열고 **Play**
-5. 시나리오(900년) → 인물(김억) 선택 → **시작하기**
+1. Unity Hub에 **Unity 6 (6000.x)** 가 설치돼 있어야 한다.
+2. 이 저장소를 받아(Code → Download ZIP → 압축 풀기) **`후삼국_만들기.bat`** 더블클릭 → Unity 창 없이 빌드한 뒤 게임을 바로 켠다 (처음 5~15분).
+3. 결과물: **바탕 화면\후삼국시대\v2\후삼국통일.exe** (`C:\Users\sjart\OneDrive\바탕 화면`이 있으면 그곳, 없으면 그 컴퓨터의 바탕 화면). 버전은 `Scripts/Core/GameVersion.cs`.
+4. 세이브는 **실행 파일과 같은 폴더**의 `save.json` — 매 계절 자동 저장, 시작 화면의 "이어하기".
+5. 빌드가 실패하면 이 폴더의 `build_husamguk.log` 확인.
 
-## 실행 파일로 테스트하기
+## 개발 (Unity 에디터)
 
-개발은 클라우드(Claude)에서 하고, 테스트는 내려받은 실행 파일로 한다는 전제로 빌드 파이프라인을 맞춰 뒀다.
+1. **`후삼국_Unity로_열기.bat`** 더블클릭 (또는 Unity Hub → Add project from disk → 이 폴더)
+2. 상단 메뉴 **Husamguk → MVP 샘플 세팅** — 샘플 데이터·`Main` 씬 생성, 그림 자동 연결
+3. `Assets/_Project/Scenes/Main.unity` 열고 **Play**
 
-- 이 저장소 최상위의 **`후삼국_만들기.bat`** 더블클릭 → Unity를 창 없이 실행해 빌드하고, 끝나면 바로 실행 파일을 켠다. (Unity 6이 설치돼 있어야 한다.)
-- 결과물 위치: `C:\Users\sjart\OneDrive\바탕 화면\후삼국시대\v1\후삼국통일.exe` (버전은 `Scripts/Core/GameVersion.cs`, 경로는 `BuildScript.OutputDir`에서 바꿀 수 있음)
-- **세이브 파일은 실행 파일과 같은 폴더**에 `save.json`으로 생긴다(`Core/SaveSystem.cs`) — 에디터 Play 모드에서는 프로젝트 루트에 생긴다.
-- 빌드가 실패하면 이 저장소 최상위에 생기는 `build_husamguk.log`를 확인.
+## 지금 들어 있는 것 (v2)
 
-## 현재 구현 범위 (1차 패스)
+- **시나리오**: 900년, 완산주 일대 여덟 고을. 시작 인물 2명 — 김억(이서, 회유형) / 김총(고부, 무력형)
+- **사건 21종**: 초상화·상황 서술·딜레마형 선택지 (견훤의 사신과 침공, 민란, 혼담, 가뭄, 궁예의 밀사, 견훤 집안의 불화, 엔딩 등)
+- **목표 7단계** + **책사 최응의 조언**(상황 진단 → 다음 수 제안 → 바로가기)
+- **판도 지도**, 영지 개요·경제·농업(공사·세율·장터), 호족 판도(회유·사성·토벌 → 귀부), 신하, 병영·징집, 출진(승산 예측), 연대기
+- 계절 리듬(가을 풍년·겨울 흉작), 군량, 민심, 고을 승격(촌→현→군→주→경), 병종 상성, 성곽
 
-GDD의 화면 17개 중 아래만 실제로 동작합니다. 나머지는 좌측 탭에서 "다음 작업" placeholder로 뜹니다.
-
-- 시나리오 선택(§3.18)
-- 영지 개요(§3.1)
-- 경제·농업 — 논 개간/저수지 정비/세율 슬라이더(§3.6)
-- 호족 판도 — 회유/사성/숙청 명령(§3.2, 혼인·인질은 다음 작업)
-- 계절 턴 진행, 단순 전투(병종 상성 포함, §5.5), 거점 등급 자동 승격(§5.6), AI의 선제 공격(§5.8), 군주 수명·자연 승계(§5.9, 1~2단계만)
-- 저장은 아직 UI에 연결되지 않음 (`GameManager.SaveGame()/LoadGame()`은 구현됨)
-
-다음 작업: 주요 관직·전체 신하·왕위 계승·외교·책략·병영·징집·출진 부대 편성·민심 관리·혼사 결정·자식 교육 화면, 전투 결과 팝업, 거점 승격 팝업, 엔딩 화면.
-
-## 아트
-
-실제 그림은 아직 없습니다 (PixelLab 연동 예정, §GDD 8). 지금은 USS 단색 패널로 레이아웃만 잡아 둔 상태입니다.
+다음 작업 후보와 결정이 필요한 사항은 [docs/HANDOFF.md](docs/HANDOFF.md) 참고.
 
 ## 폴더 구조
 
@@ -45,10 +36,13 @@ GDD의 화면 17개 중 아래만 실제로 동작합니다. 나머지는 좌측
 Assets/_Project/
   Scripts/Data      정의 (ScriptableObject): ScenarioDef, FactionDef, ProvinceDef, SettlementTierDef,
                      RetainerDef, OfficeDef, UnitDef, ResourceDef, GameDatabase
-  Scripts/Core      GameManager(턴 진행·경제·호족·전투·AI·승계), SaveSystem, 런타임 상태(GameState.cs)
-  Scripts/UI        GameUI (UI Toolkit, 시나리오 선택 + 메인 셸)
-  Scripts/Editor    GameSetup (샘플 데이터 + Main 씬 생성)
+  Scripts/Core      GameManager(계절 진행·경제·민심·호족·전투·AI·저장), Story(사건), Objectives(목표),
+                     Advisor(책사 조언), SaveSystem, GameState·SaveData
+  Scripts/UI        GameUI (UI Toolkit: 시작 화면, 메인 셸, 지도, 대화 창)
+  Scripts/Editor    GameSetup(샘플 데이터·씬), BuildScript(실행 파일), SpriteLinker·PixelArtImporter(그림)
   UI/               Shell.uss
+  Art/Sprites/      PixelLab 그림 37장 (docs/ART_LIST.md)
   Fonts/            갈무리
-  Data/ Scenes/     (에디터 메뉴가 생성)
+tools/headless/     Unity 없이 컴파일 검사·게임 자동 플레이 (클라우드 세션용, Unity가 무시함)
+tools/pixelart/     PixelLab 그림 생성 스크립트
 ```

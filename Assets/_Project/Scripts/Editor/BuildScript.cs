@@ -22,8 +22,22 @@ namespace Husamguk.EditorTools
         // 이 저장소는 Unity 프로젝트 폴더 자체가 최상위다 (Assets/의 한 단계 위). bat도 여기서 결과 파일을 찾는다.
         static string RepoRoot => Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
 
-        /// <summary>클라우드에서 개발하고 실행 파일만 내려받아 테스트하는 사용자가 지정한 폴더.</summary>
-        public static string OutputDir => Path.Combine(@"C:\Users\sjart\OneDrive\바탕 화면\후삼국시대", GameVersion.Version);
+        const string PreferredDesktop = @"C:\Users\sjart\OneDrive\바탕 화면";
+
+        /// <summary>
+        /// 실행 파일 폴더: 바탕화면\후삼국시대\{버전}. 사용자가 지정한 OneDrive 바탕화면이 있으면 그곳을,
+        /// 없으면(다른 컴퓨터) 그 컴퓨터의 바탕화면을 쓴다.
+        /// </summary>
+        public static string OutputDir
+        {
+            get
+            {
+                string desktop = Directory.Exists(PreferredDesktop)
+                    ? PreferredDesktop
+                    : System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
+                return Path.Combine(desktop, "후삼국시대", GameVersion.Version);
+            }
+        }
 
         [MenuItem("Husamguk/Windows 실행 파일 만들기")]
         public static void BuildWindowsMenu()

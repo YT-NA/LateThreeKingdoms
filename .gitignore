@@ -44,3 +44,8 @@ Thumbs.db
 # Windows 빌드 런처(후삼국_만들기.bat)가 남기는 기록/임시 파일
 /build_husamguk.log
 /last_build_husamguk.txt
+
+# 헤드리스 도구 (tools/headless) — 위의 *.csproj 무시 규칙에서 예외
+!tools/headless/**/*.csproj
+/tools/headless/**/bin/
+/tools/headless/**/obj/

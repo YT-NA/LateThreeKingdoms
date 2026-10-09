@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 rem 후삼국통일 실행 파일(.exe)을 만들고 바로 켠다. Unity 창은 뜨지 않는다.
-rem 결과: C:\Users\sjart\OneDrive\바탕 화면\후삼국시대\v번호\후삼국통일.exe (경로는 last_build_husamguk.txt)  /  기록: build_husamguk.log
+rem 결과: 바탕 화면\후삼국시대\v번호\후삼국통일.exe (C:\Users\sjart\OneDrive\바탕 화면이 있으면 그곳, 없으면 이 컴퓨터의 바탕 화면) (경로는 last_build_husamguk.txt)  /  기록: build_husamguk.log
 
 set "ROOT=%~dp0"
 set "PROJ=%ROOT%"
