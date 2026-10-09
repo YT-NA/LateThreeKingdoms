@@ -1,4 +1,5 @@
 * text=auto
+*.bat text eol=crlf
 *.cs diff=csharp text
 *.unity text merge=unityyamlmerge eol=lf
 *.prefab text merge=unityyamlmerge eol=lf

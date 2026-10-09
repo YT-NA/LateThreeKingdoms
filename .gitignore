@@ -40,3 +40,7 @@ Thumbs.db
 
 # 세이브 (실행 파일/프로젝트 루트 옆에 생김 — Core/SaveSystem.cs)
 /save.json
+
+# Windows 빌드 런처(후삼국_만들기.bat)가 남기는 기록/임시 파일
+/build_husamguk.log
+/last_build_husamguk.txt
