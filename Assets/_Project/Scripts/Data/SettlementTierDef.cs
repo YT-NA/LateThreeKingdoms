@@ -14,6 +14,8 @@ namespace Husamguk.Data
         public string hanja;
         [Tooltip("이 등급으로 오르면 임명할 수 있는 관직 이름 (예: 현령/현감)")]
         public string officeTitle;
+        [Tooltip("지도 노드·영지 개요·거점 승격 팝업(§3.13)에 쓰이는 등급별 거점 그림")]
+        public Sprite settlementSprite;
 
         [Header("승격 임계치 (다음 등급으로 가려면 이 등급에서 넘어야 하는 값)")]
         [Min(0)] public int populationThreshold;

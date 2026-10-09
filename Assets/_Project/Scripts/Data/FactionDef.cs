@@ -11,6 +11,8 @@ namespace Husamguk.Data
         public string displayName;
         [Tooltip("지도·UI에 쓰이는 세력 색")]
         public Color mapColor = Color.gray;
+        [Tooltip("상단 바·지도에 쓰이는 세력 깃발")]
+        public Sprite banner;
         public bool isPlayable = true;
         [TextArea] public string description;
     }

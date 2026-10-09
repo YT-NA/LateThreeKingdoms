@@ -71,7 +71,7 @@ ASSETS = [
     ("banner_hubaekje", 32, 48, "side", "tall Korean war banner, red and yellow cloth, black Chinese character, wooden pole"),
     ("banner_silla",    32, 48, "side", "tall Korean war banner, gold and white cloth, black Chinese character, wooden pole"),
     ("banner_taebong",  32, 48, "side", "tall Korean war banner, dark purple and gold cloth, black Chinese character, wooden pole"),
-    ("banner_player",   32, 48, "side", "tall Korean war banner, brown and crimson cloth, simple clan emblem, wooden pole"),
+    ("banner_isung_clan", 32, 48, "side", "tall Korean war banner, brown and crimson cloth, simple clan emblem, wooden pole"),
 ]
 
 

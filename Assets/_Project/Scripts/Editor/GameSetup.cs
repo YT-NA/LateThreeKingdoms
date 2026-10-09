@@ -61,7 +61,7 @@ namespace Husamguk.EditorTools
                 "완산주 일대의 말단 호족. 플레이어의 시작 세력.");
 
             // ── 신하: MVP 시나리오 주인공 ──
-            var lordIeok = RetainerAsset("lord_ieok", "김억", "", 40, 55, 45, 30, 35, 40, 50);
+            var lordIeok = RetainerAsset("ieok", "김억", "", 40, 55, 45, 30, 35, 40, 50);
 
             // ── 지역 (§3.0) — 완산주를 중심에 두고 인접 호족 7곳 ──
             var wansanju = ProvinceAsset("wansanju", "완산주", new Vector2(0, 0), tierProvince, null, "견훤 세력권",
@@ -114,6 +114,9 @@ namespace Husamguk.EditorTools
                 d.prestige = prestige;
             });
 
+            AssetDatabase.SaveAssets();
+            // Art/Sprites에 PixelLab 그림이 있으면 자동으로 연결 (docs/ART_LIST.md 이름 규칙)
+            SpriteLinker.Run();
             AssetDatabase.SaveAssets();
             BuildScene(db);
             AssetDatabase.SaveAssets();

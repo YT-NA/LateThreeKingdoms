@@ -23,7 +23,7 @@ namespace Husamguk.UI
         VisualElement _content;
         VisualElement _alertPanel;
         Label _topBarLabel;
-        Label _resourceLabel;
+        VisualElement _resourceRow;
         Label _dateLabel;
         Label _statusLabel;
 
@@ -91,6 +91,8 @@ namespace Husamguk.UI
                     var card = new VisualElement();
                     card.AddToClassList("character-card");
                     if (ch == _pickedCharacter) card.AddToClassList("character-card-selected");
+                    if (ch.retainer != null && ch.retainer.portrait != null)
+                        card.Add(MakeIcon(ch.retainer.portrait, 48));
                     card.Add(new Label(ch.retainer != null ? ch.retainer.displayName : "(이름 없음)") { style = { fontSize = 15, unityFontStyleAndWeight = FontStyle.Bold } });
                     card.Add(new Label(ch.startingFaction != null ? ch.startingFaction.displayName : ""));
                     if (!string.IsNullOrEmpty(ch.startingSituation)) card.Add(new Label(ch.startingSituation) { style = { whiteSpace = WhiteSpace.Normal } });
@@ -158,7 +160,7 @@ namespace Husamguk.UI
             topBar.AddToClassList("top-bar");
             _topBarLabel = new Label();
             _topBarLabel.AddToClassList("faction-label");
-            _resourceLabel = new Label();
+            _resourceRow = new VisualElement { style = { flexDirection = FlexDirection.Row } };
             _dateLabel = new Label();
             var nextTurnButton = new Button { text = "다음 턴" };
             nextTurnButton.AddToClassList("action-button");
@@ -170,7 +172,7 @@ namespace Husamguk.UI
                 RefreshContent();
             };
             topBar.Add(_topBarLabel);
-            topBar.Add(_resourceLabel);
+            topBar.Add(_resourceRow);
             var spacer = new VisualElement(); spacer.AddToClassList("spacer");
             topBar.Add(spacer);
             topBar.Add(_dateLabel);
@@ -235,7 +237,13 @@ namespace Husamguk.UI
             _topBarLabel.text = $"{factionDef?.displayName}   군주: {monarchDef?.displayName}";
 
             var f = gm.PlayerFaction;
-            _resourceLabel.text = f == null ? "" : $"석 {f.grain}    엽전 {f.coin}    권위 {f.prestige}";
+            _resourceRow.Clear();
+            if (f != null)
+            {
+                _resourceRow.Add(MakeResourceTag(Database.grain, f.grain));
+                _resourceRow.Add(MakeResourceTag(Database.coin, f.coin));
+                _resourceRow.Add(MakeResourceTag(Database.prestige, f.prestige));
+            }
             _dateLabel.text = $"{gm.Year}년 {GameManager.SeasonNames[gm.Season]}";
 
             if (_statusLabel != null)
@@ -417,6 +425,34 @@ namespace Husamguk.UI
         void BuildPlaceholderTab()
         {
             _content.Add(new Label($"{_subTab} 화면은 다음 작업에서 구현합니다 (docs/GDD.md 참고)."));
+        }
+
+        // ───────── 아트 헬퍼 (§8 PixelLab) ─────────
+
+        /// <summary>정사각형 스프라이트 아이콘 하나. 그림이 아직 없으면(null) 호출하지 않는 쪽이 낫다.</summary>
+        static VisualElement MakeIcon(Sprite sprite, int size)
+        {
+            var el = new VisualElement
+            {
+                style =
+                {
+                    width = size,
+                    height = size,
+                    marginRight = 6,
+                    backgroundImage = new StyleBackground(sprite),
+                },
+            };
+            el.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+            return el;
+        }
+
+        /// <summary>자원 아이콘 + 수치. 아이콘이 없으면 이름으로 대신한다.</summary>
+        static VisualElement MakeResourceTag(ResourceDef res, int amount)
+        {
+            var row = new VisualElement { style = { flexDirection = FlexDirection.Row, alignItems = Align.Center, marginRight = 18 } };
+            if (res != null && res.icon != null) row.Add(MakeIcon(res.icon, 22));
+            row.Add(new Label($"{(res != null ? res.displayName + " " : "")}{amount}"));
+            return row;
         }
     }
 }
