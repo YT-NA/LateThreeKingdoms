@@ -17,11 +17,11 @@
 
 개발은 클라우드(Claude)에서 하고, 테스트는 내려받은 실행 파일로 한다는 전제로 빌드 파이프라인을 맞춰 뒀다.
 
-- 저장소 최상위의 **`후삼국_만들기.bat`** 더블클릭 → Unity를 창 없이 실행해 빌드하고, 끝나면 바로 실행 파일을 켠다.
+- 이 폴더(`LateThreeKingdoms/`) 안의 **`후삼국_만들기.bat`** 더블클릭 → Unity를 창 없이 실행해 빌드하고, 끝나면 바로 실행 파일을 켠다.
   (RuleTheKingdom의 `게임_만들기.bat`와 같은 패턴. Unity 6이 설치돼 있어야 한다.)
 - 결과물 위치: `C:\Users\sjart\OneDrive\바탕 화면\후삼국시대\v1\후삼국통일.exe` (버전은 `Scripts/Core/GameVersion.cs`, 경로는 `BuildScript.OutputDir`에서 바꿀 수 있음)
 - **세이브 파일은 실행 파일과 같은 폴더**에 `save.json`으로 생긴다(`Core/SaveSystem.cs`) — 에디터 Play 모드에서는 프로젝트 루트에 생긴다.
-- 빌드가 실패하면 저장소 최상위의 `build_husamguk.log`를 확인.
+- 빌드가 실패하면 이 폴더(`LateThreeKingdoms/`) 안에 생기는 `build_husamguk.log`를 확인.
 
 ## 현재 구현 범위 (1차 패스)
 
