@@ -43,6 +43,9 @@ namespace Husamguk.Core
         [Tooltip("민심 관리 (§5.7, MVP 축소판)")]
         public int publicSentiment = 60;
         public int security = 60;
+
+        [Tooltip("이번 계절에 이미 모은 장정 수 (고을 크기만큼만 모을 수 있음)")]
+        public int recruitedThisSeason;
     }
 
     /// <summary>세력(FactionDef) 하나의 런타임 상태.</summary>

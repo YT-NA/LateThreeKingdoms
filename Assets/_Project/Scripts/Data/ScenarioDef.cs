@@ -23,6 +23,8 @@ namespace Husamguk.Data
             [Tooltip("이 인물이 시작하는 지역 (플레이어 수도로 삼음)")]
             public ProvinceDef startingProvince;
             [TextArea] public string startingSituation;
+            [Tooltip("플레이 성향 한 줄 (예: 회유형 — 호족 포섭이 쉽다)")]
+            public string playstyle;
         }
     }
 }

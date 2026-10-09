@@ -6,7 +6,7 @@ namespace Husamguk.Core
     /// </summary>
     public static class GameVersion
     {
-        public const int Number = 1;
-        public const string Version = "v1";
+        public const int Number = 2;
+        public const string Version = "v2";
     }
 }

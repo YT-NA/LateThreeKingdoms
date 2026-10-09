@@ -11,8 +11,7 @@ namespace Husamguk.EditorTools
     /// (OutputDir\{GameVersion.Version}\후삼국통일.exe)로 빌드한다.
     /// - 메뉴 [Husamguk > Windows 실행 파일 만들기]
     /// - 후삼국_만들기.bat → Unity를 창 없이(-batchmode) 실행해 BuildWindowsBatch를 부른다
-    /// 빌드가 끝나면 exe 경로를 저장소 최상위 last_build_husamguk.txt에 적는다 (bat가 읽어서 실행).
-    /// (RuleTheKingdom의 last_build.txt와 같은 저장소를 쓰므로 파일 이름을 분리했다.)
+    /// 빌드가 끝나면 exe 경로를 프로젝트(=저장소) 최상위 last_build_husamguk.txt에 적는다 (bat가 읽어서 실행).
     /// 세이브 파일은 실행 파일과 같은 폴더에 생긴다 (Core/SaveSystem.cs).
     /// </summary>
     public static class BuildScript
@@ -20,7 +19,8 @@ namespace Husamguk.EditorTools
         const string ScenePath = "Assets/_Project/Scenes/Main.unity";
         const string ExeName = "후삼국통일.exe";
 
-        static string RepoRoot => Path.GetFullPath(Path.Combine(Application.dataPath, "..", ".."));
+        // 이 저장소는 Unity 프로젝트 폴더 자체가 최상위다 (Assets/의 한 단계 위). bat도 여기서 결과 파일을 찾는다.
+        static string RepoRoot => Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
 
         /// <summary>클라우드에서 개발하고 실행 파일만 내려받아 테스트하는 사용자가 지정한 폴더.</summary>
         public static string OutputDir => Path.Combine(@"C:\Users\sjart\OneDrive\바탕 화면\후삼국시대", GameVersion.Version);

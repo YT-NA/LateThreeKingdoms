@@ -1,134 +1,324 @@
-/* 후삼국 대란 — MVP 셸 스타일. 실제 아트(PixelLab) 전까지는 어두운 전통 톤 단색으로 자리만 잡는다. GDD §8 */
+/* 후삼국 대란 — 셸 스타일. 어두운 전통 톤(먹·적갈·금). GDD §8 */
 
 .root {
     flex-grow: 1;
-    background-color: rgb(26, 20, 16);
-    color: rgb(230, 218, 196);
+    background-color: rgb(24, 18, 14);
+    color: rgb(232, 220, 198);
+    font-size: 16px;
 }
 
 .hidden { display: none; }
+.spacer { flex-grow: 1; }
 
-/* 상단 바 */
+.row { flex-direction: row; align-items: center; margin-bottom: 6px; }
+.row-wrap { flex-direction: row; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+
+.icon {
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+/* ───────── 시나리오 선택 ───────── */
+.scenario-screen {
+    flex-grow: 1;
+    padding: 28px 40px;
+    background-color: rgb(20, 15, 12);
+}
+.title-header {
+    margin-bottom: 20px;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(140, 100, 50);
+    padding-bottom: 12px;
+}
+.game-title { font-size: 48px; -unity-font-style: bold; color: rgb(220, 70, 55); }
+.game-subtitle { font-size: 18px; color: rgb(220, 190, 140); }
+.scenario-body { flex-grow: 1; flex-direction: row; }
+.scenario-list { width: 380px; margin-right: 24px; }
+.character-list { flex-grow: 1; }
+.section-title { font-size: 22px; -unity-font-style: bold; color: rgb(240, 205, 140); margin-bottom: 10px; }
+.scenario-year { font-size: 28px; -unity-font-style: bold; color: rgb(220, 70, 55); }
+.scenario-item, .character-card {
+    background-color: rgb(40, 29, 21);
+    border-width: 1px;
+    border-color: rgb(95, 70, 42);
+    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+.character-card { flex-direction: row; align-items: flex-start; }
+.scenario-item:hover, .character-card:hover { background-color: rgb(52, 38, 27); }
+.scenario-item-selected, .character-card-selected { border-color: rgb(225, 170, 90); border-width: 3px; background-color: rgb(58, 36, 26); }
+.character-info { flex-shrink: 1; flex-grow: 1; }
+.character-name { font-size: 24px; -unity-font-style: bold; color: rgb(245, 225, 190); }
+.character-playstyle { font-size: 16px; color: rgb(235, 175, 90); margin-top: 4px; margin-bottom: 4px; }
+.character-stats { font-size: 14px; color: rgb(200, 185, 160); margin-bottom: 6px; }
+.big-button { font-size: 20px; padding: 12px 28px; }
+
+/* ───────── 상단 바 ───────── */
+.main-shell { flex-grow: 1; }
 .top-bar {
     flex-direction: row;
     align-items: center;
-    height: 56px;
-    background-color: rgb(40, 28, 20);
+    height: 64px;
+    background-color: rgb(42, 29, 20);
     border-bottom-width: 2px;
-    border-bottom-color: rgb(120, 90, 50);
+    border-bottom-color: rgb(140, 100, 50);
     padding-left: 12px;
     padding-right: 12px;
 }
+.banner-icon {
+    width: 32px;
+    height: 48px;
+    margin-right: 8px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+.faction-label { font-size: 20px; color: rgb(235, 90, 70); -unity-font-style: bold; margin-right: 20px; }
+.resource-row { flex-direction: row; align-items: center; }
+.resource-tag { flex-direction: row; align-items: center; margin-right: 18px; }
+.resource-label { font-size: 17px; margin-right: 4px; }
+.resource-delta { font-size: 14px; color: rgb(140, 200, 120); }
+.resource-delta-bad { font-size: 14px; color: rgb(235, 100, 80); }
+.objective-mini { font-size: 15px; color: rgb(235, 190, 110); margin-right: 18px; }
+.date-label { font-size: 18px; margin-right: 14px; -unity-font-style: bold; }
+.next-turn-button { font-size: 17px; padding: 8px 18px; }
 
-.top-bar Label { font-size: 16px; margin-right: 18px; }
-.faction-label { font-size: 18px; color: rgb(220, 70, 60); -unity-font-style: bold; }
-.spacer { flex-grow: 1; }
-
-/* 본문 */
+/* ───────── 본문 ───────── */
 .body-row { flex-grow: 1; flex-direction: row; }
 
 .tab-rail {
-    width: 160px;
-    background-color: rgb(34, 24, 18);
+    width: 150px;
+    background-color: rgb(32, 23, 17);
     border-right-width: 2px;
-    border-right-color: rgb(90, 65, 40);
+    border-right-color: rgb(95, 70, 42);
     padding: 8px;
 }
-
 .tab-button {
-    height: 44px;
+    height: 48px;
     margin-bottom: 6px;
-    background-color: rgb(50, 36, 26);
+    background-color: rgb(52, 38, 27);
     border-width: 1px;
-    border-color: rgb(90, 65, 40);
-    color: rgb(230, 218, 196);
-    font-size: 14px;
+    border-color: rgb(95, 70, 42);
+    color: rgb(232, 220, 198);
+    font-size: 17px;
     -unity-text-align: middle-left;
-    padding-left: 10px;
+    padding-left: 12px;
 }
+.tab-button:hover { background-color: rgb(74, 52, 35); }
+.tab-button-selected { background-color: rgb(150, 42, 30); border-color: rgb(225, 165, 90); }
+.tab-button-small { height: 36px; font-size: 13px; }
 
-.tab-button:hover { background-color: rgb(70, 50, 34); }
-.tab-button-selected { background-color: rgb(150, 40, 30); border-color: rgb(220, 160, 90); }
-
-.subtab-row { flex-direction: row; margin-bottom: 10px; }
+.subtab-row { flex-direction: row; margin-bottom: 12px; }
 .subtab-button {
     margin-right: 6px;
-    padding: 4px 10px;
-    background-color: rgb(50, 36, 26);
+    padding: 5px 12px;
+    background-color: rgb(52, 38, 27);
     border-width: 1px;
-    border-color: rgb(90, 65, 40);
-    color: rgb(230, 218, 196);
+    border-color: rgb(95, 70, 42);
+    color: rgb(232, 220, 198);
+    font-size: 15px;
 }
-.subtab-button-selected { background-color: rgb(150, 40, 30); }
+.subtab-button:hover { background-color: rgb(74, 52, 35); }
+.subtab-button-selected { background-color: rgb(150, 42, 30); border-color: rgb(225, 165, 90); }
+.picker-label { margin-right: 8px; color: rgb(200, 180, 150); }
 
-.content {
-    flex-grow: 1;
-    padding: 16px;
-}
-
-.content-title { font-size: 20px; -unity-font-style: bold; margin-bottom: 10px; color: rgb(240, 210, 150); }
+.content { flex-grow: 1; padding: 14px 18px; }
 
 .panel {
-    background-color: rgb(40, 28, 20);
+    background-color: rgb(38, 28, 20);
     border-width: 1px;
-    border-color: rgb(90, 65, 40);
-    padding: 10px;
-    margin-bottom: 10px;
+    border-color: rgb(95, 70, 42);
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
 }
+.panel-title { font-size: 20px; -unity-font-style: bold; color: rgb(240, 205, 140); margin-bottom: 4px; }
+.panel-desc { font-size: 14px; color: rgb(185, 168, 140); white-space: normal; margin-bottom: 8px; }
+.big-line { font-size: 18px; margin-right: 12px; margin-top: 4px; margin-bottom: 4px; }
 
-.row { flex-direction: row; align-items: center; margin-bottom: 6px; }
-.row Label { min-width: 120px; }
-
-.action-button {
-    background-color: rgb(80, 56, 32);
-    border-width: 1px;
-    border-color: rgb(150, 110, 60);
-    color: rgb(240, 225, 200);
-    padding: 6px 12px;
-    margin-right: 8px;
-    margin-top: 4px;
-}
-.action-button:hover { background-color: rgb(110, 76, 42); }
-.action-button:disabled { opacity: 0.4; }
-
-.primary-button { background-color: rgb(150, 40, 30); border-color: rgb(220, 160, 90); }
-
-/* 우측 알림 */
-.alert-panel {
-    width: 220px;
-    background-color: rgb(34, 24, 18);
-    border-left-width: 2px;
-    border-left-color: rgb(90, 65, 40);
-    padding: 10px;
-}
-.alert-item {
+/* 카드 */
+.card-grid { flex-direction: row; flex-wrap: wrap; }
+.card {
+    width: 470px;
     background-color: rgb(46, 34, 24);
     border-width: 1px;
-    border-color: rgb(90, 65, 40);
-    padding: 6px;
-    margin-bottom: 8px;
-    white-space: normal;
+    border-color: rgb(100, 74, 45);
+    border-radius: 4px;
+    padding: 12px;
+    margin-right: 12px;
+    margin-bottom: 12px;
 }
+.card-small { width: 300px; }
+.card-selected { border-color: rgb(225, 170, 90); border-width: 3px; }
+.card-info { flex-shrink: 1; flex-grow: 1; }
+.card-title { font-size: 18px; -unity-font-style: bold; color: rgb(245, 225, 190); white-space: normal; }
+.card-line { font-size: 15px; white-space: normal; margin-top: 2px; }
+.card-hint { font-size: 14px; color: rgb(175, 160, 135); white-space: normal; margin-top: 2px; }
+.card-good { font-size: 15px; color: rgb(150, 210, 130); white-space: normal; margin-top: 2px; }
+.card-bad { font-size: 15px; color: rgb(240, 115, 95); white-space: normal; margin-top: 2px; }
+.unit-tag {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(52, 38, 27);
+    border-width: 1px;
+    border-color: rgb(95, 70, 42);
+    padding: 4px 10px 4px 4px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+}
+
+/* 막대 */
+.bar-label { font-size: 14px; margin-right: 8px; color: rgb(200, 180, 150); }
+.bar-bg {
+    height: 14px;
+    background-color: rgb(25, 18, 13);
+    border-width: 1px;
+    border-color: rgb(95, 70, 42);
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.bar-fill { height: 100%; }
+
+/* 목표 카드 */
+.objective-card {
+    background-color: rgb(62, 34, 24);
+    border-width: 2px;
+    border-color: rgb(205, 150, 75);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+}
+.objective-kicker { font-size: 14px; color: rgb(225, 170, 90); }
+.objective-title { font-size: 26px; -unity-font-style: bold; color: rgb(250, 225, 175); }
+.objective-desc { font-size: 16px; white-space: normal; margin-top: 4px; margin-bottom: 8px; }
+.objective-progress { font-size: 18px; -unity-font-style: bold; margin-right: 18px; }
+.objective-reward { font-size: 15px; color: rgb(235, 190, 110); margin-right: 18px; }
+
+/* 판도 지도 */
+.map {
+    background-color: rgb(30, 36, 26);
+    border-width: 2px;
+    border-color: rgb(95, 70, 42);
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+.map-node {
+    position: absolute;
+    border-width: 2px;
+    border-color: rgb(80, 60, 40);
+    border-radius: 6px;
+    padding: 4px 6px;
+    justify-content: center;
+}
+.map-node:hover { border-color: rgb(255, 240, 200); }
+.map-node-mine { border-color: rgb(240, 200, 120); border-width: 3px; }
+.map-node-border { border-color: rgb(215, 170, 70); }
+.map-node-row { flex-direction: row; align-items: center; }
+.map-node-name { font-size: 15px; -unity-font-style: bold; color: rgb(250, 238, 215); }
+.map-node-sub { font-size: 13px; color: rgb(225, 210, 185); }
+
+/* 버튼 */
+.action-button {
+    background-color: rgb(84, 58, 33);
+    border-width: 1px;
+    border-color: rgb(155, 112, 60);
+    color: rgb(242, 228, 205);
+    font-size: 15px;
+    padding: 6px 12px;
+    margin-right: 8px;
+    margin-top: 6px;
+}
+.action-button:hover { background-color: rgb(115, 80, 44); }
+.action-button:disabled { opacity: 0.4; }
+.primary-button { background-color: rgb(155, 42, 30); border-color: rgb(225, 165, 90); }
+.primary-button:hover { background-color: rgb(185, 55, 38); }
+
+/* ───────── 우측: 책사 + 보고 ───────── */
+.alert-panel {
+    width: 360px;
+    background-color: rgb(32, 23, 17);
+    border-left-width: 2px;
+    border-left-color: rgb(95, 70, 42);
+    padding: 10px;
+}
+.advisor-card {
+    background-color: rgb(44, 32, 23);
+    border-width: 1px;
+    border-color: rgb(155, 112, 60);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+.advisor-name { font-size: 17px; -unity-font-style: bold; color: rgb(240, 205, 140); }
+.advice-item {
+    border-left-width: 3px;
+    border-left-color: rgb(155, 112, 60);
+    padding-left: 8px;
+    margin-top: 8px;
+}
+.advice-urgent { border-left-color: rgb(220, 70, 55); }
+.advice-line { font-size: 15px; white-space: normal; }
+.report-title { font-size: 16px; -unity-font-style: bold; color: rgb(240, 205, 140); margin-top: 8px; margin-bottom: 4px; }
+.log-line { font-size: 14px; white-space: normal; margin-bottom: 4px; }
+.log-info { color: rgb(205, 192, 170); }
+.log-good { color: rgb(150, 210, 130); }
+.log-bad { color: rgb(240, 115, 95); }
+.log-event { color: rgb(220, 195, 240); }
+.log-goal { color: rgb(245, 200, 100); -unity-font-style: bold; }
 
 /* 하단 상태바 */
 .status-bar {
-    height: 40px;
-    background-color: rgb(20, 14, 10);
+    height: 44px;
+    background-color: rgb(18, 13, 10);
     border-top-width: 2px;
-    border-top-color: rgb(90, 65, 40);
+    border-top-color: rgb(95, 70, 42);
     flex-direction: row;
     align-items: center;
-    padding-left: 12px;
+    padding-left: 14px;
 }
+.status-label { font-size: 16px; color: rgb(235, 205, 150); }
 
-/* 시나리오 선택 */
-.scenario-screen { flex-grow: 1; flex-direction: row; padding: 24px; }
-.scenario-list, .character-list { flex-grow: 1; margin-right: 16px; }
-.scenario-item, .character-card {
-    background-color: rgb(40, 28, 20);
-    border-width: 1px;
-    border-color: rgb(90, 65, 40);
-    padding: 10px;
-    margin-bottom: 8px;
+/* ───────── 대화 창 (사건·전투) ───────── */
+.modal-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.72);
+    align-items: center;
+    justify-content: center;
 }
-.scenario-item-selected, .character-card-selected { border-color: rgb(220, 160, 90); border-width: 2px; }
+.modal-box {
+    width: 960px;
+    background-color: rgb(40, 29, 21);
+    border-width: 3px;
+    border-color: rgb(205, 150, 75);
+    border-radius: 6px;
+    padding: 20px 24px;
+}
+.modal-title {
+    font-size: 30px;
+    -unity-font-style: bold;
+    color: rgb(245, 205, 135);
+    margin-bottom: 12px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(120, 88, 50);
+    padding-bottom: 8px;
+}
+.modal-mid { flex-direction: row; align-items: flex-start; margin-bottom: 16px; }
+.modal-speaker { align-items: center; margin-right: 18px; width: 150px; flex-shrink: 0; }
+.modal-speaker-name { font-size: 15px; color: rgb(235, 175, 90); margin-top: 6px; -unity-text-align: middle-center; white-space: normal; }
+.modal-body { flex-shrink: 1; flex-grow: 1; font-size: 19px; white-space: normal; }
+.choice-button {
+    background-color: rgb(62, 44, 29);
+    border-width: 1px;
+    border-color: rgb(155, 112, 60);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+}
+.choice-button:hover { background-color: rgb(110, 50, 34); border-color: rgb(240, 190, 110); }
+.choice-button:disabled { opacity: 0.4; }
+.choice-text { font-size: 19px; -unity-font-style: bold; color: rgb(250, 232, 200); }
+.choice-sub { font-size: 14px; color: rgb(220, 180, 120); white-space: normal; }

@@ -21,6 +21,8 @@ namespace Husamguk.Data
         public string startingHojokName;
         public SettlementTierDef startingTier;
         [Min(0)] public int startingPopulation = 50;
+        [Tooltip("견훤 직할지처럼 회유·귀부가 불가능하고 정예군이 지키는 적 거점")]
+        public bool hostileStronghold;
 
         [Header("지역 특산 (§2.6, 2차 범위 — MVP는 완산주만 사용 가능)")]
         [TextArea] public string specialty;

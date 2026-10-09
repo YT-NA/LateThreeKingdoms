@@ -56,17 +56,24 @@ namespace Husamguk.EditorTools
             var officeMilitary = OfficeAsset("daejanggun", "대장군", OfficeField.Military, 0.20f, "중앙군 훈련 속도 +20%");
             var officeDiplomacy = OfficeAsset("naesaryeong", "내사령", OfficeField.Diplomacy, 0.25f, "외교 성공률 +25%");
 
-            // ── 세력 (§2) ──
-            var playerFaction = FactionAsset("isung_clan", "이서 호족", new Color(0.5f, 0.25f, 0.2f),
-                "완산주 일대의 말단 호족. 플레이어의 시작 세력.");
+            // ── 세력 (§2) — 플레이어가 고르는 가문마다 하나 ──
+            var playerFaction = FactionAsset("isung_clan", "이서 김씨 가문", new Color(0.62f, 0.2f, 0.16f),
+                "이서의 작은 성을 다스리는 말단 호족 가문.");
+            var gobuFaction = FactionAsset("gobu_clan", "고부 김씨 가문", new Color(0.2f, 0.35f, 0.6f),
+                "고부 현을 다스리는 무인 가문.");
 
-            // ── 신하: MVP 시나리오 주인공 ──
-            var lordIeok = RetainerAsset("ieok", "김억", "", 40, 55, 45, 30, 35, 40, 50);
+            // ── 인물 (§7 7스탯: 통솔·무력·지력·학문·정치·매력·덕망) ──
+            var lordIeok = RetainerAsset("ieok", "김억", "金億", 50, 55, 50, 40, 45, 65, 60);
+            var lordGimchong = RetainerAsset("gimchong", "김총", "金摠", 68, 72, 45, 30, 40, 38, 40);
+            var advisorChoieung = RetainerAsset("choieung", "최응", "崔凝", 30, 20, 85, 90, 75, 60, 70);
+            var kingGyeonhwon = RetainerAsset("gyeonhwon", "견훤", "甄萱", 92, 88, 70, 40, 65, 72, 45);
+            var kingGungye = RetainerAsset("gungye", "궁예", "弓裔", 85, 80, 75, 60, 55, 70, 30);
 
             // ── 지역 (§3.0) — 완산주를 중심에 두고 인접 호족 7곳 ──
-            var wansanju = ProvinceAsset("wansanju", "완산주", new Vector2(0, 0), tierProvince, null, "견훤 세력권",
-                new[] { "gimje", "imsil", "jinan", "geumgu" }, 0.1f, "호남 평야의 중심 거점. 식량 생산력이 뛰어나다.");
-            var iseo = ProvinceAsset("iseo", "이서", new Vector2(-3, 1), tierVillage, playerFaction, null,
+            // 시작 세력은 모두 비워 둔다 — 플레이어가 고른 인물의 시작 지역만 플레이어 땅이 되고, 나머지는 호족 땅.
+            var wansanju = ProvinceAsset("wansanju", "완산주", new Vector2(0, 0), tierProvince, null, "후백제 (견훤 직할)",
+                new[] { "gimje", "imsil", "jinan", "geumgu" }, 0.1f, "호남 평야의 중심 거점. 견훤의 도읍.", stronghold: true);
+            var iseo = ProvinceAsset("iseo", "이서", new Vector2(-3, 1), tierVillage, null, "이서 호족",
                 new[] { "gobu", "geumgu" }, 0f, null);
             var gobu = ProvinceAsset("gobu", "고부", new Vector2(-4, -1), tierTownship, null, "고부 호족",
                 new[] { "iseo", "gimje", "taein" }, 0f, null);
@@ -87,7 +94,7 @@ namespace Husamguk.EditorTools
                 s.id = "scenario_900";
                 s.displayName = "후삼국 초기 — 완산주의 이름 없는 호족";
                 s.year = 900;
-                s.description = "말단 호족으로 시작해 완산주 일대를 평정하라.";
+                s.description = "견훤이 완산주에 후백제를 세운 해. 이름 없는 호족으로 시작해 호남 들녘 여덟 고을을 평정하라.";
                 s.playableCharacters = new List<ScenarioDef.PlayableCharacter>
                 {
                     new()
@@ -95,7 +102,16 @@ namespace Husamguk.EditorTools
                         retainer = lordIeok,
                         startingFaction = playerFaction,
                         startingProvince = iseo,
-                        startingSituation = "이서의 작은 성 하나를 다스리는 촌주. 완산주의 그늘 아래서 세력을 키워야 한다.",
+                        playstyle = "회유형 — 매력이 높아 호족을 말로 끌어들이기 쉽지만, 통솔이 평범해 완산주 공략은 길다",
+                        startingSituation = "이서의 작은 성 하나를 다스리는 촌주. 병력은 보잘것없지만 사람을 끄는 힘이 있다. 이웃 호족들을 하나씩 내 사람으로 만들어 완산주를 포위하라.",
+                    },
+                    new()
+                    {
+                        retainer = lordGimchong,
+                        startingFaction = gobuFaction,
+                        startingProvince = gobu,
+                        playstyle = "무력형 — 통솔이 높아 싸움에 강하지만, 매력이 낮아 호족 회유가 서툴다",
+                        startingSituation = "고부 현의 무인 현령. 사병은 넉넉하나 주변 호족들과 사이가 좋지 않다. 칼로 길을 열되, 너무 많은 적을 만들지 않도록 조심하라.",
                     },
                 };
             });
@@ -103,15 +119,21 @@ namespace Husamguk.EditorTools
             var db = Asset<GameDatabase>("Data/GameDatabase.asset", d =>
             {
                 d.scenarios = new List<ScenarioDef> { scenario900 };
-                d.factions = new List<FactionDef> { playerFaction };
+                d.factions = new List<FactionDef> { playerFaction, gobuFaction };
                 d.settlementTiers = new List<SettlementTierDef> { tierVillage, tierTownship, tierDistrict, tierProvince, tierCapital };
                 d.provinces = new List<ProvinceDef> { wansanju, iseo, gobu, gimje, taein, imsil, jinan, geumgu };
                 d.units = new List<UnitDef> { uInfantry, uSpear, uArcher, uCavalry };
                 d.offices = new List<OfficeDef> { officeAdmin, officeMilitary, officeDiplomacy };
-                d.retainers = new List<RetainerDef> { lordIeok };
+                d.retainers = new List<RetainerDef> { lordIeok, lordGimchong, advisorChoieung, kingGyeonhwon, kingGungye };
                 d.grain = grain;
                 d.coin = coin;
                 d.prestige = prestige;
+                // 밸런스 (헤드리스 시뮬레이션으로 맞춘 값 — docs/HANDOFF.md 참고). 기존 에셋도 덮어쓴다.
+                d.appeaseCoinCost = 40;
+                d.appeaseLoyaltyGain = 10;
+                d.grantSurnamePrestigeCost = 25;
+                d.grantSurnameLoyaltyGain = 12;
+                d.loyaltyRevoltThreshold = 25;
             });
 
             AssetDatabase.SaveAssets();
@@ -201,7 +223,7 @@ namespace Husamguk.EditorTools
             });
 
         static ProvinceDef ProvinceAsset(string id, string name, Vector2 pos, SettlementTierDef tier, FactionDef owner, string hojokName,
-            string[] adjacent, float grainBonus, string specialty) =>
+            string[] adjacent, float grainBonus, string specialty, bool stronghold = false) =>
             Asset<ProvinceDef>($"Data/Provinces/Province_{id}.asset", p =>
             {
                 p.id = id; p.displayName = name; p.mapPosition = pos; p.startingTier = tier;
@@ -209,6 +231,7 @@ namespace Husamguk.EditorTools
                 p.adjacentProvinceIds = new List<string>(adjacent);
                 p.grainBonus = grainBonus; p.specialty = specialty;
                 p.startingPopulation = 50;
+                p.hostileStronghold = stronghold;
             });
 
         static T Asset<T>(string relativePath, System.Action<T> configure) where T : ScriptableObject
