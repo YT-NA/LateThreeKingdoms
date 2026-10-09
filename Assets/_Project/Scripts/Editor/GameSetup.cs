@@ -18,6 +18,9 @@ namespace Husamguk.EditorTools
     {
         const string Root = "Assets/_Project";
 
+        /// <summary>true면 확인 창 없이 진행 (실행 파일 자동 빌드에서 쓴다).</summary>
+        public static bool Silent;
+
         [MenuItem("Husamguk/MVP 샘플 세팅")]
         public static void Run()
         {
@@ -120,10 +123,10 @@ namespace Husamguk.EditorTools
         static void BuildScene(GameDatabase db)
         {
             var scenePath = $"{Root}/Scenes/Main.unity";
-            if (File.Exists(scenePath) &&
+            if (!Silent && File.Exists(scenePath) &&
                 !EditorUtility.DisplayDialog("Husamguk", "Main 씬이 이미 있습니다. 새로 만들까요?", "새로 만들기", "취소"))
                 return;
-            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            if (!Silent && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
 
             string dbPath = AssetDatabase.GetAssetPath(db);
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);

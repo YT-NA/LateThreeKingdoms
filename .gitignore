@@ -37,3 +37,6 @@ crashlytics-build.properties
 # OS
 .DS_Store
 Thumbs.db
+
+# 세이브 (실행 파일/프로젝트 루트 옆에 생김 — Core/SaveSystem.cs)
+/save.json
