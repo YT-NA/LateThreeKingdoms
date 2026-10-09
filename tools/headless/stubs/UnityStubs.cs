@@ -74,7 +74,8 @@ namespace UnityEngine.UIElements
     public class EventBase { }
     public class ClickEvent : EventBase { }
     public class StyleSheet : ScriptableObject { }
-    public class PanelSettings : ScriptableObject { public PanelScaleMode scaleMode; public Vector2Int referenceResolution; public PanelScreenMatchMode screenMatchMode; public float match; }
+    public class ThemeStyleSheet : StyleSheet { }
+    public class PanelSettings : ScriptableObject { public ThemeStyleSheet themeStyleSheet; public PanelScaleMode scaleMode; public Vector2Int referenceResolution; public PanelScreenMatchMode screenMatchMode; public float match; }
     public enum PanelScaleMode { ConstantPixelSize, ScaleWithScreenSize }
     public enum PanelScreenMatchMode { MatchWidthOrHeight }
     public struct VisualElementStyleSheetSet { public void Add(StyleSheet s) { } }

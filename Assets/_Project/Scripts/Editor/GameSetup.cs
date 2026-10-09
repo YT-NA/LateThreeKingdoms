@@ -176,6 +176,9 @@ namespace Husamguk.EditorTools
                 p.referenceResolution = new Vector2Int(1920, 1080);
                 p.screenMatchMode = PanelScreenMatchMode.MatchWidthOrHeight;
                 p.match = 0.5f;
+                // 버튼·스크롤 같은 기본 컨트롤 모양을 위한 Unity 기본 런타임 테마 (에디터가 만들어 두는 파일이 있으면 연결)
+                if (p.themeStyleSheet == null)
+                    p.themeStyleSheet = AssetDatabase.LoadAssetAtPath<ThemeStyleSheet>("Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss");
             });
             var uiGo = new GameObject("GameUI", typeof(UIDocument), typeof(GameUI));
             uiGo.GetComponent<UIDocument>().panelSettings = panelSettings;

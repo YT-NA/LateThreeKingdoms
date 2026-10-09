@@ -87,6 +87,7 @@
 
 .tab-rail {
     width: 150px;
+    flex-shrink: 0;
     background-color: rgb(32, 23, 17);
     border-right-width: 2px;
     border-right-color: rgb(95, 70, 42);
@@ -121,7 +122,7 @@
 .subtab-button-selected { background-color: rgb(150, 42, 30); border-color: rgb(225, 165, 90); }
 .picker-label { margin-right: 8px; color: rgb(200, 180, 150); }
 
-.content { flex-grow: 1; padding: 14px 18px; }
+.content { flex-grow: 1; flex-shrink: 1; padding: 14px 18px; }
 
 .panel {
     background-color: rgb(38, 28, 20);
@@ -235,6 +236,8 @@
 /* ───────── 우측: 책사 + 보고 ───────── */
 .alert-panel {
     width: 360px;
+    flex-grow: 0;
+    flex-shrink: 0;
     background-color: rgb(32, 23, 17);
     border-left-width: 2px;
     border-left-color: rgb(95, 70, 42);
