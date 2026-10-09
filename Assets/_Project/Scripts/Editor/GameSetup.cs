@@ -34,8 +34,8 @@ namespace Husamguk.EditorTools
             var coin = ResourceAsset("coin", "엽전", new Color(0.85f, 0.75f, 0.35f));
             var prestige = ResourceAsset("prestige", "권위", new Color(0.7f, 0.3f, 0.3f));
 
-            // ── 거점 등급 (§6.1) — 촌→현→군→주→경 ──
-            var tierVillage = TierAsset("village", "촌", "村", "촌주", 0, 0, 0);
+            // ── 거점 등급 (§6.1) — 촌→현→군→주→경. 각 수치는 "이 등급에서 다음으로 넘어가려면 넘어야 할 값" ──
+            var tierVillage = TierAsset("village", "촌", "村", "촌주", 10, 2, 30);
             var tierTownship = TierAsset("township", "현", "縣", "현령", 80, 3, 200);
             var tierDistrict = TierAsset("district", "군", "郡", "태수", 200, 8, 600);
             var tierProvince = TierAsset("province", "주", "州", "도독", 500, 20, 1500);
