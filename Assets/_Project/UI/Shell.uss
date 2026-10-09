@@ -1,0 +1,134 @@
+/* 후삼국 대란 — MVP 셸 스타일. 실제 아트(PixelLab) 전까지는 어두운 전통 톤 단색으로 자리만 잡는다. GDD §8 */
+
+.root {
+    flex-grow: 1;
+    background-color: rgb(26, 20, 16);
+    color: rgb(230, 218, 196);
+}
+
+.hidden { display: none; }
+
+/* 상단 바 */
+.top-bar {
+    flex-direction: row;
+    align-items: center;
+    height: 56px;
+    background-color: rgb(40, 28, 20);
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(120, 90, 50);
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.top-bar Label { font-size: 16px; margin-right: 18px; }
+.faction-label { font-size: 18px; color: rgb(220, 70, 60); -unity-font-style: bold; }
+.spacer { flex-grow: 1; }
+
+/* 본문 */
+.body-row { flex-grow: 1; flex-direction: row; }
+
+.tab-rail {
+    width: 160px;
+    background-color: rgb(34, 24, 18);
+    border-right-width: 2px;
+    border-right-color: rgb(90, 65, 40);
+    padding: 8px;
+}
+
+.tab-button {
+    height: 44px;
+    margin-bottom: 6px;
+    background-color: rgb(50, 36, 26);
+    border-width: 1px;
+    border-color: rgb(90, 65, 40);
+    color: rgb(230, 218, 196);
+    font-size: 14px;
+    -unity-text-align: middle-left;
+    padding-left: 10px;
+}
+
+.tab-button:hover { background-color: rgb(70, 50, 34); }
+.tab-button-selected { background-color: rgb(150, 40, 30); border-color: rgb(220, 160, 90); }
+
+.subtab-row { flex-direction: row; margin-bottom: 10px; }
+.subtab-button {
+    margin-right: 6px;
+    padding: 4px 10px;
+    background-color: rgb(50, 36, 26);
+    border-width: 1px;
+    border-color: rgb(90, 65, 40);
+    color: rgb(230, 218, 196);
+}
+.subtab-button-selected { background-color: rgb(150, 40, 30); }
+
+.content {
+    flex-grow: 1;
+    padding: 16px;
+}
+
+.content-title { font-size: 20px; -unity-font-style: bold; margin-bottom: 10px; color: rgb(240, 210, 150); }
+
+.panel {
+    background-color: rgb(40, 28, 20);
+    border-width: 1px;
+    border-color: rgb(90, 65, 40);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.row { flex-direction: row; align-items: center; margin-bottom: 6px; }
+.row Label { min-width: 120px; }
+
+.action-button {
+    background-color: rgb(80, 56, 32);
+    border-width: 1px;
+    border-color: rgb(150, 110, 60);
+    color: rgb(240, 225, 200);
+    padding: 6px 12px;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+.action-button:hover { background-color: rgb(110, 76, 42); }
+.action-button:disabled { opacity: 0.4; }
+
+.primary-button { background-color: rgb(150, 40, 30); border-color: rgb(220, 160, 90); }
+
+/* 우측 알림 */
+.alert-panel {
+    width: 220px;
+    background-color: rgb(34, 24, 18);
+    border-left-width: 2px;
+    border-left-color: rgb(90, 65, 40);
+    padding: 10px;
+}
+.alert-item {
+    background-color: rgb(46, 34, 24);
+    border-width: 1px;
+    border-color: rgb(90, 65, 40);
+    padding: 6px;
+    margin-bottom: 8px;
+    white-space: normal;
+}
+
+/* 하단 상태바 */
+.status-bar {
+    height: 40px;
+    background-color: rgb(20, 14, 10);
+    border-top-width: 2px;
+    border-top-color: rgb(90, 65, 40);
+    flex-direction: row;
+    align-items: center;
+    padding-left: 12px;
+}
+
+/* 시나리오 선택 */
+.scenario-screen { flex-grow: 1; flex-direction: row; padding: 24px; }
+.scenario-list, .character-list { flex-grow: 1; margin-right: 16px; }
+.scenario-item, .character-card {
+    background-color: rgb(40, 28, 20);
+    border-width: 1px;
+    border-color: rgb(90, 65, 40);
+    padding: 10px;
+    margin-bottom: 8px;
+}
+.scenario-item-selected, .character-card-selected { border-color: rgb(220, 160, 90); border-width: 2px; }
